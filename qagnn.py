@@ -11,6 +11,7 @@ from utils.parser_utils import *
 
 
 DECODER_DEFAULT_LR = {
+    'arc': 1e-3,
     'csqa': 1e-3,
     'obqa': 3e-4,
     'medqa_usmle': 1e-3,
