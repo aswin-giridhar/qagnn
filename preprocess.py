@@ -9,9 +9,9 @@ from utils.graph import generate_adj_data_from_grounded_concepts__use_LM
 
 input_paths = {
     'arc': {
-        'train': './data/arc/ARC-V1-Feb2018-2/ARC-Challenge/ARC-Challenge-Train.jsonl',
-        'dev': './data/arc/ARC-V1-Feb2018-2/ARC-Challenge/ARC-Challenge-Dev.jsonl',
-        'test': './data/arc/ARC-V1-Feb2018-2/ARC-Challenge/ARC-Challenge-Test.jsonl',
+        'train': './data/arc/ARC-V1-Feb2018-2/ARC-Challenge/ARC-Challenge-Train-Preprocessed.jsonl',
+        'dev': './data/arc/ARC-V1-Feb2018-2/ARC-Challenge/ARC-Challenge-Dev-Preprocessed.jsonl',
+        'test': './data/arc/ARC-V1-Feb2018-2/ARC-Challenge/ARC-Challenge-Test-Preprocessed.jsonl',
 
     },
     'csqa': {
