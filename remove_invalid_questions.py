@@ -47,6 +47,7 @@ def main():
         answer_list_letter_all = []
         for i in range(len(answer_list_digit_all)):
             answer_list_letter_all.append(chr(ord('@')+answer_list_digit_all[i]))
+            
         for set in input_paths[dataset]['jsonl'].keys():
             questions_to_keep = []
             question_index = 0
@@ -54,7 +55,7 @@ def main():
                 with open(output_paths[dataset]['csv'][set], 'w') as output_csv:
                     for line in input_csv:
                         if question_index == 0 \
-                                or ((all(str(answer) in line for answer in answer_list_digit_all) or all(answer in line for answer in answer_list_letter_all)) \
+                                or ((all(('(' + str(answer) + ')') in line for answer in answer_list_digit_all) or all(('(' + answer + ')') in line for answer in answer_list_letter_all)) \
                                 and (str('(' + chr(ord('@')+(n_way_per_dataset[dataset]+1)) + ')') not in line and str('(' + chr(answer_list_digit[-1]+1) + ')') not in line)):
                             output_csv.write(line)
                             if question_index > 0:
