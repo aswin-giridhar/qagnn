@@ -54,8 +54,7 @@ def main():
                 with open(output_paths[dataset]['csv'][set], 'w') as output_csv:
                     for line in input_csv:
                         if question_index == 0 \
-                                or (('(A)' in line or '(1)' in line) and ('(B)' in line or '(2)' in line) \
-                                and (answer in line for answer in answer_list_digit or answer in line for answer in answer_list_letter) \
+                                or ((all(str(answer) in line for answer in answer_list_digit_all) or all(answer in line for answer in answer_list_letter_all)) \
                                 and (str('(' + chr(ord('@')+(n_way_per_dataset[dataset]+1)) + ')') not in line and str('(' + chr(answer_list_digit[-1]+1) + ')') not in line)):
                             output_csv.write(line)
                             if question_index > 0:
