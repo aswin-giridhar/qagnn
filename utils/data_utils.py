@@ -464,11 +464,11 @@ def load_bert_xlnet_roberta_input_tensors(statement_jsonl_path, model_type, mode
                                             cls_token_at_end=bool(model_type in ['xlnet']),  # xlnet has a cls token at the end
                                             cls_token=tokenizer.cls_token,
                                             sep_token=tokenizer.sep_token,
-                                            sep_token_extra=bool(model_type in ['roberta', 'albert']),
+                                            sep_token_extra=bool(model_type in ['roberta', 'albert', 'aristo-roberta']),
                                             cls_token_segment_id=2 if model_type in ['xlnet'] else 0,
                                             pad_on_left=bool(model_type in ['xlnet']),  # pad on the left for xlnet
                                             pad_token_segment_id=4 if model_type in ['xlnet'] else 0,
-                                            sequence_b_segment_id=0 if model_type in ['roberta', 'albert'] else 1)
+                                            sequence_b_segment_id=0 if model_type in ['roberta', 'albert', 'aristo-roberta'] else 1)
     example_ids = [f.example_id for f in features]
     *data_tensors, all_label = convert_features_to_tensors(features)
     return (example_ids, all_label, *data_tensors)
@@ -480,7 +480,7 @@ def load_input_tensors(input_jsonl_path, model_type, model_name, max_seq_length)
         raise NotImplementedError
     elif model_type in ('gpt',):
         return load_gpt_input_tensors(input_jsonl_path, max_seq_length)
-    elif model_type in ('bert', 'xlnet', 'roberta', 'albert'):
+    elif model_type in ('bert', 'xlnet', 'roberta', 'albert', 'aristo-roberta'):
         return load_bert_xlnet_roberta_input_tensors(input_jsonl_path, model_type, model_name, max_seq_length)
 
 

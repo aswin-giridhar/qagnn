@@ -14,6 +14,7 @@ from utils.layers import *
 from utils.data_utils import get_gpt_token_num
 
 MODEL_CLASS_TO_NAME = {
+    'aristo-roberta': ['LIAMF-USP/aristo-roberta'],
     'gpt': list(OPENAI_GPT_PRETRAINED_CONFIG_ARCHIVE_MAP.keys()),
     'bert': list(BERT_PRETRAINED_CONFIG_ARCHIVE_MAP.keys()),
     'xlnet': list(XLNET_PRETRAINED_CONFIG_ARCHIVE_MAP.keys()),
