@@ -319,7 +319,13 @@ def train(args):
                 best_dev_acc = dev_acc
                 final_test_acc = test_acc
                 best_dev_epoch = epoch_id
-            if epoch_id % 10 == 0:
+                if args.save_model:
+                    torch.save([model.state_dict(), args], f"{model_path}.{epoch_id}")
+                    # with open(model_path +".{}.log.txt".format(epoch_id), 'w') as f:
+                    #     for p in model.named_parameters():
+                    #         print (p, file=f)
+                    print(f'model saved to {model_path}.{epoch_id}')
+            else:
                 if args.save_model:
                     torch.save([model.state_dict(), args], f"{model_path}.{epoch_id}")
                     # with open(model_path +".{}.log.txt".format(epoch_id), 'w') as f:
