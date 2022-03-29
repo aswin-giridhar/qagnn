@@ -113,7 +113,7 @@ def extract_english(acrnet_path, output_csv_path, output_vocab_path):
     print('extracting English concepts and relations from ArcNet...')
     relation_mapping = load_merge_relation()
     num_lines = sum(1 for line in open(acrnet_path, 'r', encoding='utf-8'))
-    cpnet_vocab = []
+    arcnet_vocab = []
     concepts_seen = set()
     with open(acrnet_path, 'r', encoding="utf8") as fin, \
             open(output_csv_path, 'w', encoding="utf8") as fout:
@@ -149,10 +149,10 @@ def extract_english(acrnet_path, output_csv_path, output_vocab_path):
                     for w in [head, tail]:
                         if w not in concepts_seen:
                             concepts_seen.add(w)
-                            cpnet_vocab.append(w)
+                            arcnet_vocab.append(w)
 
     with open(output_vocab_path, 'w') as fout:
-        for word in cpnet_vocab:
+        for word in arcnet_vocab:
             fout.write(word + '\n')
 
     print(f'extracted ArctNet csv file saved to {output_csv_path}')
@@ -160,7 +160,7 @@ def extract_english(acrnet_path, output_csv_path, output_vocab_path):
     print()
 
 
-def construct_graph(cpnet_csv_path, cpnet_vocab_path, output_path, prune=True):
+def construct_graph(arcnet_csv_path, arcnet_vocab_path, output_path, prune=True):
     print('generating ArcNet graph file...')
 
     nltk.download('stopwords', quiet=True)
@@ -172,7 +172,7 @@ def construct_graph(cpnet_csv_path, cpnet_vocab_path, output_path, prune=True):
 
     concept2id = {}
     id2concept = {}
-    with open(cpnet_vocab_path, "r", encoding="utf8") as fin:
+    with open(arcnet_vocab_path, "r", encoding="utf8") as fin:
         id2concept = [w.strip() for w in fin]
     concept2id = {w: i for i, w in enumerate(id2concept)}
 
@@ -180,8 +180,8 @@ def construct_graph(cpnet_csv_path, cpnet_vocab_path, output_path, prune=True):
     relation2id = {r: i for i, r in enumerate(id2relation)}
 
     graph = nx.MultiDiGraph()
-    nrow = sum(1 for _ in open(cpnet_csv_path, 'r', encoding='utf-8'))
-    with open(cpnet_csv_path, "r", encoding="utf8") as fin:
+    nrow = sum(1 for _ in open(arcnet_csv_path, 'r', encoding='utf-8'))
+    with open(arcnet_csv_path, "r", encoding="utf8") as fin:
 
         def not_save(cpt):
             if cpt in blacklist:
