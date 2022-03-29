@@ -127,7 +127,7 @@ def extract_english(acrnet_path, output_csv_path, output_vocab_path):
                         - Split("/")[-1] to trim the "/c/en/" and just get the entity name, convert all to 
                         - Lowercase for uniformity.
                     """
-                    rel = toks[1].split("/")[-1].lower()
+                    rel = toks[1].split("/")[-1]
                     head = del_pos(toks[2]).split("/")[-1].lower()
                     tail = del_pos(toks[3]).split("/")[-1].lower()
 
